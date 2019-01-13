@@ -23,50 +23,40 @@ public:
      * @return: A new sorted integer array
      */
     vector<int> mergeSortedArray(vector<int> &A, vector<int> &B) {
-        int Anum=0,Bnum=0,Cnum0;
-        int Amax=A.size(),Bmax=B.size();
-		vector<int> C(2000);
+        int Anum=0,Bnum=0;							//表示数组A、B的下表值 
+        int Amax=A.size(),Bmax=B.size();			//数组A、B的最大长度 
+		vector<int> C(Amax+Bmax);					//合成的数组C 
 		
-		for(int i=0;i<100;i++){
-			if(A[Anum]<=B[Bnum]){
-				C[i]=A[Anum];Anum++;
-			}else{
+		for(int i=0;i<Amax+Bmax;i++){
+			if((Bnum<Bmax)&&(Anum<Amax)){           //当A、b数组还有值比较 
+				if(A[Anum]<=B[Bnum]){
+					C[i]=A[Anum];Anum++;
+				}else{
+					C[i]=B[Bnum];Bnum++;
+				}
+			}else if(Anum==Amax){					//当A完结 
 				C[i]=B[Bnum];Bnum++;
-			}
-		}
-		
-		
+			}else if(Bnum==Bmax){					//当B完结
+				 C[i]=A[Anum];Anum++;
+			} 				
+		}	
 		return C;
-		// write your code here
     }
 };
 
 int main() {
 	
 	
-	int a[5] = {3,2,5,4,1};
+	int a[5] = {1,2,3,4,5};
 		
 	vector<int> A(a, a+5);
 	vector<int> B(a, a+5);
-	vector<int> C(2000);	
+	vector<int> C(10);	
 	Solution solut;
 	C=solut.mergeSortedArray(A,B);
 	for(int i=0;i<10;i++){
 		cout<<C[i]<<'\0'<<endl;
 	}
-	
-	
-//通过数组a的地址初始化，注意地址是从0到5（左闭右开区间）
-//	vector<int> b(a, a+5);
-//	
-//	vector<int>::iterator iter;
-//	
-//	
-//	cout<<kthLargestElement(n,b)<<'\0'<<endl;
-//	
-//	for(iter=b.begin();iter!=b.end();iter++){
-//		cout<<*iter<<'\0';
-//	}
 	
 	return 0;
 }
