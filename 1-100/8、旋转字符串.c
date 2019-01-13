@@ -30,18 +30,14 @@ public:
     void rotateString(string &str, int offset) {
     	int strlen=str.size();				//确定字符串长度 
 		int temp; 							//交换空间 
-    	for(int i=offset;i<strlen;i++){
-    		if((i+offset)<strlen){
-    			temp=str[i];
-    			str[i]=str[i+offset];
-    			str[i+offset]=temp;	
-    		}else{
-    			temp=str[offset-1];
-    			str[i]=str[i+offset];
-    			str[i+offset]=temp;		
-    		}		 
-    	}
-    	
+		for(int j=0;j<offset;j++){
+			for(int i=0;i<strlen-1;i++){
+    			temp=str[0];
+    			str[0]=str[i+1];
+    			str[i+1]=temp;
+    		}
+		}
+   	
         // write your code here
     }
 };
