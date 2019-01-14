@@ -19,7 +19,15 @@ offset=3 => "efgabcd"
 挑战
 在数组上原地旋转，使用O(1)的额外空间
 */
-
+	void rotateString(string &str,int offset){
+        //wirte your code here
+        if (str.size() == 0)
+            return;
+            
+        offset = offset % str.size();
+        str = str.substr(str.size() - offset, offset) +
+                str.substr(0, str.size() - offset);
+    }
 class Solution {
 public:
        /**
