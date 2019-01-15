@@ -19,15 +19,7 @@ offset=3 => "efgabcd"
 挑战
 在数组上原地旋转，使用O(1)的额外空间
 */
-	void rotateString(string &str,int offset){
-        //wirte your code here
-        if (str.size() == 0)
-            return;
-            
-        offset = offset % str.size();
-        str = str.substr(str.size() - offset, offset) +
-                str.substr(0, str.size() - offset);
-    }
+
 class Solution {
 public:
        /**
@@ -37,23 +29,43 @@ public:
      */
     void rotateString(string &str, int offset) {
     	int strlen=str.size();				//确定字符串长度 
-		int temp; 							//交换空间 
-		for(int j=0;j<offset;j++){
-			for(int i=0;i<strlen-1;i++){
-    			temp=str[0];
-    			str[0]=str[i+1];
-    			str[i+1]=temp;
-    		}
-		}
-   	
-        // write your code here
+		char temp; 							//交换空间 
+		
+		if( strlen == 0)
+			return ;
+		
+		offset=offset%strlen;
+		 
+		reverse(str,0,strlen-offset-1);
+		cout<<"第一层结束"<<str<<'\0'<<endl;
+		reverse(str,strlen-offset,strlen-1);
+		cout<<"第二层结束"<<str<<'\0'<<endl;
+		reverse(str,0,strlen-1);
     }
+    void reverse(string &str,int start,int end){
+    	char temp;int i,j;
+		for(i = start, j = end; i < j; i++,j--){
+    		temp = str[i];
+			str[i] = str[j];
+			str[j] = temp; 
+			cout<<i<<" "<<j<<str<<'\0'<<endl;
+    	}
+    	
+    }
+    
+    
+    
 };
 
 int main() {
 	
 	
 	int a[5] = {1,2,3,4,5};
+	string aa = "abcdefghijk";
+	Solution solut;
+	solut.rotateString(aa,3);
+	cout<<"最终结果"<<aa<<'\0'<<endl;
+	
 //		
 //	vector<int> A(a, a+5);
 //	vector<int> B(a, a+5);
